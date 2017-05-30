@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Code Analyzer"
+            id="cn.letterme.code.analyzer.commands.codeanalyzer">
+      </category>
+      <command
+            name="Dead Code Finder"
+            categoryId="cn.letterme.code.analyzer.commands.deadcode"
+            id="cn.letterme.code.analyzer.commands.deadcode">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="cn.letterme.code.analyzer.commands.deadcode"
+            class="cn.letterme.code.analyzer.handlers.DeadCodeHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="Code Analyzer"
+               mnemonic="M"
+               id="cn.letterme.code.analyzer.menus.codeanalyzer">
+            <command
+                  commandId="cn.letterme.code.analyzer.commands.deadcode"
+                  mnemonic="S"
+                  id="cn.letterme.code.analyzer.menus.deadcode">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   
+   <!-- 创建marker -->
+   <extension point="org.eclipse.core.resources.markers" id="cn.letterme.code.analyzer.marker.deadcode"
+        name="Unused Code">
+        <super type="org.eclipse.core.resources.problemmarker"/>
+        <persistent value="true"/>
+        <attribute name="Dead Code"/>
+    </extension>
+
+</plugin>
